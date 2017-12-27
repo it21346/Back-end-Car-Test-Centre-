@@ -19,11 +19,11 @@
 			<form:input path="email" />
 		</div>
 		<button class="ui button" type="submit">Save</button>
-		<td><c:if test="${not empty error}">
-		Error: ${error}</c:if></td>
+
 	</form:form>
 	<form:form action="cancel" method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>
-	
+	<td><c:if test="${not empty error}">
+		Error: ${error}</c:if></td>
 </div>
