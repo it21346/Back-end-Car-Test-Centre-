@@ -73,7 +73,11 @@ public class CustomerController {
 		model.addAttribute("pageTitle", "Update Customer");
 		return "customer-update-form";
 	}
-
+	@PostMapping("/cancel")
+	public String cancelButton() {
+		// return to the previous page
+		return "redirect:/customer/list";
+	}
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(@ModelAttribute("customer") Customer customer, Model model) {
 		// check if the customer we are trying to save,already exists
