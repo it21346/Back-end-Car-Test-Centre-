@@ -41,5 +41,7 @@
 	</form:form>
 	<td><c:if test="${not empty error}">
 		Error: ${error}</c:if></td>
-
+	<form method="post" action="list-vehicles.jsp">
+		<input type="hidden" name="timestamp" id="timestamp" value="5"/>
+	</form>
 </div>

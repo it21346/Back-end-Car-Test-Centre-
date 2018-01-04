@@ -15,8 +15,9 @@
 			<th>Date</th>
 			<th>Owner Name</th>
 			<th>Owner Surname</th>
+			<th>Time Of Arrival</th>
 			<th>Actions</th>
-
+			
 		</thead>
 		<!-- loop over and print the customer's vehicle -->
 		<c:forEach var="tempVehicle" items="${vehicles}">
@@ -28,6 +29,7 @@
 				<td>${tempVehicle.date}</td>
 				<td>${tempVehicle.owner_name}</td>
 				<td>${tempVehicle.owner_surname}</td>
+				<td><% String hidden = request.getParameter("timestamp"); %> <%=hidden %></td>
 				<td><a
 					href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"
 					onclick="return confirm('Are you sure you want to delete?')"> <i
