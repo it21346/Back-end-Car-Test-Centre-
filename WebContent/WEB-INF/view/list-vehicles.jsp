@@ -29,7 +29,7 @@
 				<td>${tempVehicle.date}</td>
 				<td>${tempVehicle.owner_name}</td>
 				<td>${tempVehicle.owner_surname}</td>
-				<td><% String hidden = request.getParameter("timestamp"); %> <%=hidden %></td>
+				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
 				<td><a
 					href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"
 					onclick="return confirm('Are you sure you want to delete?')"> <i

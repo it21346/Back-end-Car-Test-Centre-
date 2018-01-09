@@ -42,6 +42,9 @@ public class Vehicle {
 
 	@Column(name = "customer_id")
 	private int customer_id;
+	
+	@Column(name = "TIME_OF_ARRIVAL")
+	private String TIME_OF_ARRIVAL;
 
 	public Vehicle() {
 
@@ -57,6 +60,14 @@ public class Vehicle {
 		this.owner_name = owner_name;
 		this.owner_surname = owner_surname;
 		this.customer_id = customer_id;
+	}
+
+	public String getTIME_OF_ARRIVAL() {
+		return TIME_OF_ARRIVAL;
+	}
+
+	public void setTIME_OF_ARRIVAL(String tIME_OF_ARRIVAL) {
+		TIME_OF_ARRIVAL = tIME_OF_ARRIVAL;
 	}
 
 	public int getID() {
@@ -127,6 +138,6 @@ public class Vehicle {
 	public String toString() {
 		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
 				+ Type + ", date=" + date + ", owner_name=" + owner_name + ", owner_surname=" + owner_surname
-				+ ", customer_id=" + customer_id + "]";
+				+ ", customer_id=" + customer_id + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + "]";
 	}
 }

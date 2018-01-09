@@ -74,10 +74,10 @@ public class VehicleController {
 	@PostMapping("/updateVehicle")
 	public String updateVehicle(int vehicle_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {
 		vehicle.setID(vehicle_id);
-		if (vehicleService.exists(vehicle) == false) {
-			if (vehicle.getDate() == "") {
-				vehicle.setDate(null);
-			}
+		if (vehicle.getDate() == "") {
+			vehicle.setDate(null);
+		}
+		if (vehicleService.exists(vehicle) == false) {	
 			// save the vehicle using the service
 			vehicleService.updateVehicle(vehicle);
 			return "redirect:/vehicle/listVehicles/" + vehicle.getCustomer_id();
@@ -91,7 +91,8 @@ public class VehicleController {
 	}
 
 	@PostMapping("/saveVehicle")
-	public String saveVehicle(@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+	public String saveVehicle(int customer_id,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+		vehicle.setCustomer_id(customer_id);
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
@@ -102,6 +103,9 @@ public class VehicleController {
 		} else {
 			System.out.println("Vehicle already exists!");
 			model.addAttribute("error", "The Vehicle already exists.Please try again!");
+			model.addAttribute("customer_id", vehicle.getCustomer_id());
+			model.addAttribute("customer_name", vehicle.getOwner_name());
+			model.addAttribute("customer_surname", vehicle.getOwner_surname());
 			return "vehicle-form";
 		}
 

@@ -30,8 +30,8 @@
 				value="${customer_surname}">
 		</div>
 		<div class="field">
-			<label>Owner ID</label> <input type="text" name="customer_id"
-				value="${customer_id}" readonly="readonly">
+			<label>Owner ID</label>
+			<input type="number" name="customer_id" value="${customer_id}" readonly="readonly">			
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>
@@ -41,7 +41,4 @@
 	</form:form>
 	<td><c:if test="${not empty error}">
 		Error: ${error}</c:if></td>
-	<form method="post" action="list-vehicles.jsp">
-		<input type="hidden" name="timestamp" id="timestamp" value="5"/>
-	</form>
 </div>
