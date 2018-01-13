@@ -2,7 +2,7 @@
 
 <div class="ui segment">
 
-	<h3>Update Customer:${customer.name}  ${customer.surname}</h3>
+	<h3>Update Customer:${customer.name} ${customer.surname}</h3>
 
 	<form:form
 		action="${pageContext.request.contextPath}/customer/updateCustomer"
@@ -20,12 +20,14 @@
 			<form:input path="email" />
 		</div>
 		<div class="field">
-			<label>ID</label>
-			<input name="customer_ID" value="${customer.ID}" type="number" readonly="readonly" />
+			<label>ID</label> <input name="customer_ID" value="${customer.ID}"
+				type="number" readonly="readonly" />
 		</div>
 		<button class="ui button" type="submit">Save</button>
-		<td><c:if test="${not empty error}">
-		Error: ${error}</c:if></td>
 	</form:form>
-
+	<form:form action="cancel" method="POST" class="ui form">
+		<button class="ui button" type="submit">Cancel</button>
+	</form:form>
+	<td><c:if test="${not empty error}">
+		Error: ${error}</c:if></td>
 </div>

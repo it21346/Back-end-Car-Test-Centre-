@@ -35,8 +35,14 @@ public class VehicleController {
 
 		// add page title
 		model.addAttribute("pageTitle", "List Vehicles");
-		model.addAttribute("customer_id",ID);
+		model.addAttribute("customer_id", ID);
 		return "list-vehicles";
+	}
+
+	@PostMapping("/cancel/{ID}")
+	public String cancelButton(@PathVariable("ID") int ID) {
+		// return to the previous page
+		return "redirect:/vehicle/listVehicles/"+ID;
 	}
 
 	@GetMapping("/showAddVehicleForm/{ID}")
@@ -54,10 +60,11 @@ public class VehicleController {
 	}
 
 	@GetMapping("delete/{customer_id}/{vehicle_id}")
-	public String deleteVehicle(@PathVariable("vehicle_id") int vehicle_id,@PathVariable("customer_id") int customer_id, Model model) {		
+	public String deleteVehicle(@PathVariable("vehicle_id") int vehicle_id,
+			@PathVariable("customer_id") int customer_id, Model model) {
 		vehicleService.deleteVehicle(vehicle_id);
-		
-		return "redirect:/vehicle/listVehicles/"+customer_id;
+
+		return "redirect:/vehicle/listVehicles/" + customer_id;
 	}
 
 	@GetMapping("showUpdateForm/{ID}")
@@ -77,7 +84,7 @@ public class VehicleController {
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
-		if (vehicleService.exists(vehicle) == false) {	
+		if (vehicleService.exists(vehicle) == false) {
 			// save the vehicle using the service
 			vehicleService.updateVehicle(vehicle);
 			return "redirect:/vehicle/listVehicles/" + vehicle.getCustomer_id();
@@ -91,7 +98,7 @@ public class VehicleController {
 	}
 
 	@PostMapping("/saveVehicle")
-	public String saveVehicle(int customer_id,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+	public String saveVehicle(int customer_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {
 		vehicle.setCustomer_id(customer_id);
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
