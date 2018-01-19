@@ -5,7 +5,7 @@
 	<h3>Update Customer:${customer.name} ${customer.surname}</h3>
 
 	<form:form
-		action="${pageContext.request.contextPath}/customer/updateCustomer"
+		action="${pageContext.request.contextPath}/customer/updateCustomer/${customer.ID}"
 		modelAttribute="customer" method="POST" class="ui form">
 		<div class="field">
 			<label>First Name</label>

@@ -93,8 +93,8 @@ public class CustomerController {
 	}
 
 	// https://stackoverflow.com/questions/5956897/passing-input-value-to-action-asp-net-mvc-3
-	@PostMapping("/updateCustomer")
-	public String updateCustomer(int customer_ID, @ModelAttribute("customer") Customer customer, Model model) {
+	@PostMapping("/updateCustomer/{ID}")
+	public String updateCustomer(@PathVariable("ID") int customer_ID, @ModelAttribute("customer") Customer customer, Model model) {
 		customer.setID(customer_ID);
 		// check if the customer we are trying to update,already exists with the same
 		// fields given
