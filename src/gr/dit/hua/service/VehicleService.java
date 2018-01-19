@@ -18,5 +18,7 @@ public interface VehicleService {
 
 	public boolean exists(Vehicle vehicle);
 
+	public void calculateFee(int veh_id, float calculatedFee);
+
 
 }

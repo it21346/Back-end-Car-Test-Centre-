@@ -16,8 +16,9 @@
 			<th>Owner Name</th>
 			<th>Owner Surname</th>
 			<th>Time Of Arrival</th>
+			<th>Fee</th>
 			<th>Actions</th>
-			
+
 		</thead>
 		<!-- loop over and print the customer's vehicle -->
 		<c:forEach var="tempVehicle" items="${vehicles}">
@@ -30,6 +31,7 @@
 				<td>${tempVehicle.owner_name}</td>
 				<td>${tempVehicle.owner_surname}</td>
 				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
+				<td>${tempVehicle.fee}</td>
 				<td><a
 					href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"
 					onclick="return confirm('Are you sure you want to delete?')"> <i
@@ -37,12 +39,15 @@
 				</a><br></br> <a
 					href="${pageContext.request.contextPath}/vehicle/showUpdateForm/${tempVehicle.ID}"><i
 						class="fa fa-refresh" aria-hidden="true"></i> Update</a><br></br>
-					<button type="button">
-						<a href="">Fee 
-					</button>:
-					<form action="">
-						<input type="text" value="">
-					</form></td>
+					<form
+						action="${pageContext.request.contextPath}/vehicle/fee/${customer_id}/${tempVehicle.ID}"
+						method="post">
+						
+						
+							<input type="text" id="textbox" value="">
+						
+						<button type="submit" name="fee">Fee</button>
+					</form>
 			</tr>
 		</c:forEach>
 	</table>

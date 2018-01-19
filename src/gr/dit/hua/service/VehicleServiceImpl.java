@@ -54,4 +54,10 @@ public class VehicleServiceImpl implements VehicleService {
 		return vehicleDAO.exists(vehicle);
 	}
 
+	@Override
+	@Transactional
+	public void calculateFee(int veh_id,float calculatedFee) {
+		vehicleDAO.calculateFee(veh_id,calculatedFee);
+	}
+
 }

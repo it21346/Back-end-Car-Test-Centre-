@@ -46,6 +46,9 @@ public class Vehicle {
 	@Column(name = "TIME_OF_ARRIVAL")
 	private String TIME_OF_ARRIVAL;
 
+	@Column(name = "Fee")
+	private float fee;
+	
 	public Vehicle() {
 
 	}
@@ -60,6 +63,14 @@ public class Vehicle {
 		this.owner_name = owner_name;
 		this.owner_surname = owner_surname;
 		this.customer_id = customer_id;
+	}
+
+	public float getFee() {
+		return fee;
+	}
+
+	public void setFee(float fee) {
+		this.fee = fee;
 	}
 
 	public String getTIME_OF_ARRIVAL() {
@@ -138,6 +149,7 @@ public class Vehicle {
 	public String toString() {
 		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
 				+ Type + ", date=" + date + ", owner_name=" + owner_name + ", owner_surname=" + owner_surname
-				+ ", customer_id=" + customer_id + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + "]";
+				+ ", customer_id=" + customer_id + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + "]";
 	}
+
 }

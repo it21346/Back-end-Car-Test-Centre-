@@ -17,4 +17,6 @@ public interface VehicleDAO {
 	public void updateVehicle(Vehicle vehicle);
 
 	public boolean exists(Vehicle vehicle);
+
+	public void calculateFee(int veh_id, float calculatedFee);
 }

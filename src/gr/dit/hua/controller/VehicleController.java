@@ -3,6 +3,8 @@ package gr.dit.hua.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -109,5 +111,12 @@ public class VehicleController {
 			return "vehicle-form";
 		}
 
+	}
+	@PostMapping("/fee/{cust_id}/{veh_id}")
+	public String calculateFee(@PathVariable("cust_id") int cust_id,@PathVariable("veh_id") int veh_id,Model model) {
+		float calculatedFee;
+		calculatedFee=25;
+		vehicleService.calculateFee(veh_id,calculatedFee);
+		return "redirect:/vehicle/listVehicles/"+cust_id;
 	}
 }
