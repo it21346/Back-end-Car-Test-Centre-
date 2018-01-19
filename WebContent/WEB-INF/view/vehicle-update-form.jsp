@@ -2,7 +2,8 @@
 
 <div class="ui segment">
 
-	<h3>Update Vehicle for Customer:${vehicle.owner_name}  ${vehicle.owner_surname}</h3>
+	<h3>Update Vehicle for Customer:${vehicle.owner_name}
+		${vehicle.owner_surname}</h3>
 
 	<form:form
 		action="${pageContext.request.contextPath}/vehicle/updateVehicle"
@@ -17,32 +18,37 @@
 		</div>
 		<div class="field">
 			<label>Type of Vehicle</label>
-			<form:radiobuttons path="Type"/>
+			<form:radiobuttons path="Type" />
 		</div>
 		<div class="field">
 			<label>Date</label>
-			<form:input path="date" />			
-		</div>
-		
-		<div class="field">
-			<label>Owner Name</label>
-			<input type="text" name="owner_name" value="${vehicle.owner_name}" readonly="readonly">			
-		</div>
-		<div class="field">
-			<label>Owner Surname</label>
-			<input type="text" name="owner_surname" value="${vehicle.owner_surname}" readonly="readonly">			
-		</div>
-		<div class="field">
-			<label>Owner ID</label>
-			<input type="number" name="customer_id" value="${vehicle.customer_id}" readonly="readonly">			
-		</div>
-		<div class="field">
-			<label>Vehicle ID</label>
-			<input type="number" name="vehicle_id" value="${vehicle.ID}" readonly="readonly">			
+			<form:input path="date" />
 		</div>
 
-		<button class="ui button" type="submit">Save</button><c:if test="${not empty error}">
-		Error: ${error}</c:if></td>
+		<div class="field">
+			<label>Owner Name</label> <input type="text" name="owner_name"
+				value="${vehicle.owner_name}" readonly="readonly">
+		</div>
+		<div class="field">
+			<label>Owner Surname</label> <input type="text" name="owner_surname"
+				value="${vehicle.owner_surname}" readonly="readonly">
+		</div>
+		<div class="field">
+			<label>Owner ID</label> <input type="number" name="customer_id"
+				value="${vehicle.customer_id}" readonly="readonly">
+		</div>
+		<div class="field">
+			<label>Vehicle ID</label> <input type="number" name="vehicle_id"
+				value="${vehicle.ID}" readonly="readonly">
+		</div>
+
+		<button class="ui button" type="submit">Save</button>
+
 	</form:form>
-
+	<form:form action="${pageContext.request.contextPath}/vehicle/cancel/${vehicle.customer_id}"
+		method="POST" class="ui form">
+		<button class="ui button" type="submit">Cancel</button>
+	</form:form>
+	<td><c:if test="${not empty error}">
+		Error: ${error}</c:if></td>
 </div>

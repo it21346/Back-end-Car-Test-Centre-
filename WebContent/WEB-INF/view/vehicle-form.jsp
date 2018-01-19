@@ -14,7 +14,7 @@
 		</div>
 		<div class="field">
 			<label>Type of Vehicle</label>
-			<form:radiobuttons path="Type" />
+			<form:radiobuttons path="Type" value="Epivatigo" checked="checked"/>
 		</div>
 		<div class="field">
 			<label>Date</label>
@@ -35,7 +35,7 @@
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>
-	<form:form action="${pageContext.request.contextPath}/customer/cancel"
+	<form:form action="${pageContext.request.contextPath}/vehicle/cancel/${customer_id}"
 		method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>
