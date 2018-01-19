@@ -44,7 +44,9 @@ public class VehicleController {
 	@PostMapping("/cancel/{ID}")
 	public String cancelButton(@PathVariable("ID") int ID) {
 		// return to the previous page
+
 		return "redirect:/vehicle/listVehicles/" + ID;
+
 	}
 
 	@GetMapping("/showAddVehicleForm/{ID}")
