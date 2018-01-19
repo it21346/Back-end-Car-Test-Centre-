@@ -25,7 +25,7 @@
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>
-	<form:form action="cancel" method="POST" class="ui form">
+	<form:form action="${pageContext.request.contextPath}/customer/cancel" method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>
 	<td><c:if test="${not empty error}">
