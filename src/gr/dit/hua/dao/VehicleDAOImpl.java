@@ -20,8 +20,6 @@ public class VehicleDAOImpl implements VehicleDAO {
 	@SuppressWarnings("deprecation")
 	public List<Vehicle> getVehicles(int ID) {
 		// get current hibernate session
-		System.out.println(ID);
-
 		Session currentSession = sessionFactory.getCurrentSession();
 		Customer customer = currentSession.get(Customer.class, ID);
 		// create a query

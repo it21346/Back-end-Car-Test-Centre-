@@ -14,13 +14,16 @@
 		</div>
 		<div class="field">
 			<label>Type of Vehicle</label>
-			<form:radiobuttons path="Type" value="Epivatigo" checked="checked"/>
+			<form:radiobuttons path="Type" value="Epivatigo" checked="checked" />
 		</div>
 		<div class="field">
 			<label>Date</label>
 			<form:input path="date" />
 		</div>
-
+		<div class="field">
+			<label>CC</label>
+			<form:input path="CC" />
+		</div>
 		<div class="field">
 			<label>Owner Name</label> <input type="text" name="owner_name"
 				value="${customer_name}">
@@ -30,12 +33,13 @@
 				value="${customer_surname}">
 		</div>
 		<div class="field">
-			<label>Owner ID</label>
-			<input type="number" name="customer_id" value="${customer_id}" readonly="readonly">			
+			<label>Owner ID</label> <input type="number" name="customer_id"
+				value="${customer_id}" readonly="readonly">
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>
-	<form:form action="${pageContext.request.contextPath}/vehicle/cancel/${customer_id}"
+	<form:form
+		action="${pageContext.request.contextPath}/vehicle/cancel/${customer_id}"
 		method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>

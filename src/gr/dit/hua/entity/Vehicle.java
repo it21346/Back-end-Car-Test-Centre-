@@ -42,13 +42,19 @@ public class Vehicle {
 
 	@Column(name = "customer_id")
 	private int customer_id;
-	
+
 	@Column(name = "TIME_OF_ARRIVAL")
 	private String TIME_OF_ARRIVAL;
 
 	@Column(name = "Fee")
 	private float fee;
-	
+
+	@Column(name = "CC")
+	private int cc;
+
+	@Column(name = "STATUS")
+	private String status;
+
 	public Vehicle() {
 
 	}
@@ -65,6 +71,19 @@ public class Vehicle {
 		this.customer_id = customer_id;
 	}
 
+	public int getCC() {
+		return cc;
+	}
+
+	public void setCC(int cc) {
+		this.cc = cc;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String Status) {
+		this.status = Status;
+	}
 	public float getFee() {
 		return fee;
 	}

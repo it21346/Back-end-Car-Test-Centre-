@@ -3,8 +3,6 @@ package gr.dit.hua.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.dit.hua.entity.Customer;
 import gr.dit.hua.entity.Vehicle;
+import gr.dit.hua.entity.Vehicle.type_of_vehicle;
 import gr.dit.hua.service.CustomerService;
 import gr.dit.hua.service.VehicleService;
 
@@ -123,9 +122,23 @@ public class VehicleController {
 
 	@PostMapping("/fee/{cust_id}/{veh_id}")
 	public String calculateFee(@PathVariable("cust_id") int cust_id, @PathVariable("veh_id") int veh_id, Model model) {
-		float calculatedFee;
-		calculatedFee = 25;
-		vehicleService.calculateFee(veh_id, calculatedFee);
-		return "redirect:/vehicle/listVehicles/" + cust_id;
+		float calculatedFee=0;
+		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
+		if(vehicle.getDate().compareTo(vehicle.getTIME_OF_ARRIVAL()) >0 ) {
+			
+		}
+		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
+			if(vehicle.getCC() <= 3 && vehicle.getCC() > 0) {					
+				calculatedFee = calculatedFee + 100;					
+			}else
+				calculatedFee = calculatedFee + 150;
+		}else 
+			if(vehicle.getCC() <= 1800 && vehicle.getCC() > 0){
+				calculatedFee = calculatedFee + 50;
+			}else 
+				calculatedFee = calculatedFee + 80;
+		
+		vehicleService.calculateFee(veh_id,calculatedFee);
+		return"redirect:/vehicle/listVehicles/"+cust_id;
 	}
 }

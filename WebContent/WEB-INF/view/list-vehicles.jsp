@@ -17,6 +17,7 @@
 			<th>Owner Surname</th>
 			<th>Time Of Arrival</th>
 			<th>Fee</th>
+			<th>CC</th>
 			<th>Actions</th>
 
 		</thead>
@@ -32,6 +33,7 @@
 				<td>${tempVehicle.owner_surname}</td>
 				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
 				<td>${tempVehicle.fee}</td>
+				<td>${tempVehicle.CC}</td>
 				<td><a
 					href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"
 					onclick="return confirm('Are you sure you want to delete?')"> <i
