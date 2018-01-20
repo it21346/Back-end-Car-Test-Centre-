@@ -7,7 +7,8 @@
 
 	<form:form
 		action="${pageContext.request.contextPath}/vehicle/updateVehicle"
-		modelAttribute="vehicle" method="POST" class="ui form">
+		modelAttribute="vehicle" method="POST" id="vehicleForm"
+		class="ui form">
 		<div class="field">
 			<label>Model</label>
 			<form:input path="model" />
@@ -24,7 +25,19 @@
 			<label>Date</label>
 			<form:input path="date" />
 		</div>
-
+		<div class="field">
+			<label>CC</label>
+			<form:input path="CC" />
+		</div>
+		<div class="field">
+			<label>Status</label> <select name="statusList" form="vehicleForm"
+				id="selected">
+				<option value="Pending">Pending</option>
+				<option value="Fix">Needs to Fix issues</option>
+				<option value="Insurance">Insurance Invalid</option>
+				<option value="Control">Control</option>
+			</select>
+		</div>		
 		<div class="field">
 			<label>Owner Name</label> <input type="text" name="owner_name"
 				value="${vehicle.owner_name}" readonly="readonly">
@@ -45,7 +58,8 @@
 		<button class="ui button" type="submit">Save</button>
 
 	</form:form>
-	<form:form action="${pageContext.request.contextPath}/vehicle/cancel/${vehicle.customer_id}"
+	<form:form
+		action="${pageContext.request.contextPath}/vehicle/cancel/${vehicle.customer_id}"
 		method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>

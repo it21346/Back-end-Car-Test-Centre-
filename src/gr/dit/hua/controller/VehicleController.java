@@ -81,7 +81,9 @@ public class VehicleController {
 	}
 
 	@PostMapping("/updateVehicle")
-	public String updateVehicle(int vehicle_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+	public String updateVehicle(String statusList,int vehicle_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+		System.out.println("THE LIST SELECTED THE :"+statusList);
+		vehicle.setStatus(statusList);
 		vehicle.setID(vehicle_id);
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
@@ -101,7 +103,9 @@ public class VehicleController {
 
 	@PostMapping("/saveVehicle")
 	public String saveVehicle(int customer_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+		
 		vehicle.setCustomer_id(customer_id);
+		vehicle.setStatus("Pending");
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
@@ -124,9 +128,6 @@ public class VehicleController {
 	public String calculateFee(@PathVariable("cust_id") int cust_id, @PathVariable("veh_id") int veh_id, Model model) {
 		float calculatedFee=0;
 		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
-		if(vehicle.getDate().compareTo(vehicle.getTIME_OF_ARRIVAL()) >0 ) {
-			
-		}
 		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
 			if(vehicle.getCC() <= 3 && vehicle.getCC() > 0) {					
 				calculatedFee = calculatedFee + 100;					
