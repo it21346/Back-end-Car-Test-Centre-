@@ -87,7 +87,7 @@ public class CustomerController {
 			return "redirect:/customer/list";
 		} else {
 			System.out.println("User already exists!");
-			model.addAttribute("error", "The customer already exists.Please try again!");
+			model.addAttribute("errorr", "The customer already exists.Please try again!");
 			return "customer-form";
 		}
 	}
@@ -104,7 +104,7 @@ public class CustomerController {
 			return "redirect:/customer/list";
 		} else {
 			System.out.println("User already exists!");
-			model.addAttribute("error", "The customer already exists.Please try again!");
+			model.addAttribute("errorr", "The customer already exists.Please try again!");
 			model.addAttribute("customer.ID", customer.getID());
 			return "customer-update-form";
 		}

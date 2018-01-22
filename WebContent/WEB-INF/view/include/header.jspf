@@ -1,10 +1,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 <title>${pageTitle}</title>
 <!-- reference our style sheet -->
 <link type="text/css" rel="stylesheet"
@@ -27,50 +31,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .dropbtn {
-    background-color: #3498DB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+	background-color: #3498DB;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
 }
+
 .dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
+	background-color: #2980B9;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
 }
 
-.dropdown a:hover {background-color: #f1f1f1}
+.dropdown a:hover {
+	background-color: #f1f1f1
+}
 
-.show {display:block;}
+.show {
+	display: block;
+}
 </style>
 </head>
 <body>
+
 	<nav class="ui fixed menu teal inverted navbar">
 		<a href="" class="brand item">Customers</a> <a
 			href="${pageContext.request.contextPath}/customer/list" class="item">List
 			All</a> <a href="${pageContext.request.contextPath}/customer/showAddForm"
 			class="item">Add</a>
+		<sec:authorize access="isAuthenticated()">
+        Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
+			<sec:authentication property="principal.authorities" />
+			<a id="logout-nav" class="item" name="logout-nav"> <i
+				class="fa fa-sign-out" aria-hidden="true"></i> Logout
+			</a>
+		</sec:authorize>
 	</nav>
 	<!-- end nav -->
 

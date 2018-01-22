@@ -45,12 +45,8 @@
 						class="fa fa-refresh" aria-hidden="true"></i> Update</a><br></br>
 					<form
 						action="${pageContext.request.contextPath}/vehicle/fee/${customer_id}/${tempVehicle.ID}"
-						method="post">
-						
-						
-							<input type="text" id="textbox" value="">
-						
-						<button type="submit" name="fee">Fee</button>
+						method="post">						
+					<button type="submit" name="fee">Fee</button>
 					</form>
 			</tr>
 		</c:forEach>

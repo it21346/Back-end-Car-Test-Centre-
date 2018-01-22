@@ -140,6 +140,6 @@ public class VehicleController {
 				calculatedFee = calculatedFee + 80;
 		
 		vehicleService.calculateFee(veh_id,calculatedFee);
-		return"redirect:/vehicle/listVehicles/"+cust_id;
+		return "redirect:/vehicle/listVehicles/"+cust_id;
 	}
 }

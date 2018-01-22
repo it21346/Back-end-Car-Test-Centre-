@@ -28,6 +28,6 @@
 	<form:form action="${pageContext.request.contextPath}/customer/cancel" method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>
-	<td><c:if test="${not empty error}">
-		Error: ${error}</c:if></td>
+	<td><c:if test="${not empty errorr}">
+		Error: ${errorr}</c:if></td>
 </div>
