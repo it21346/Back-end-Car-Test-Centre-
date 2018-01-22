@@ -102,10 +102,8 @@ public class VehicleController {
 	}
 
 	@PostMapping("/saveVehicle")
-	public String saveVehicle(int customer_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {
-		Customer customer = new Customer();
-		customer.setID(customer_id);
-		vehicle.setCustomer_id(customer);
+	public String saveVehicle(Customer customer_id, @ModelAttribute("vehicle") Vehicle vehicle, Model model) {		
+		vehicle.setCustomer_id(customer_id);
 		vehicle.setStatus("Pending");
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);

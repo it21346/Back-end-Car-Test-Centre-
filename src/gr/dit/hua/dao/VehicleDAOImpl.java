@@ -21,10 +21,13 @@ public class VehicleDAOImpl implements VehicleDAO {
 	public List<Vehicle> getVehicles(int ID) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
+		
 		Customer customer = currentSession.get(Customer.class, ID);
+		System.out.println("*********"+customer.getID());
 		// create a query
-		Query<Vehicle> query = currentSession.createQuery("from Vehicle v where v.customer_id= :key order by ID ",
+		Query<Vehicle> query = currentSession.createQuery("from Vehicle v where v.customer_id = :key order by ID ",
 				Vehicle.class);
+		
 		query.setLong("key", customer.getID());
 		// execute the query and get the results list
 		List<Vehicle> vehicles = query.getResultList();
