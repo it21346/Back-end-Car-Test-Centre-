@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,9 +41,10 @@ public class Vehicle {
 
 	@Column(name = "owner_surname")
 	private String owner_surname;
-
-	@Column(name = "customer_id")
-	private int customer_id;
+		
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 
 	@Column(name = "TIME_OF_ARRIVAL")
 	private String TIME_OF_ARRIVAL;
@@ -60,7 +63,7 @@ public class Vehicle {
 	}
 
 	public Vehicle(String model, String registration_number, type_of_vehicle type, String date, String owner_name,
-			String owner_surname, int customer_id) {
+			String owner_surname, Customer customer_id) {
 		super();
 		this.model = model;
 		this.registration_number = registration_number;
@@ -68,7 +71,7 @@ public class Vehicle {
 		this.date = date;
 		this.owner_name = owner_name;
 		this.owner_surname = owner_surname;
-		this.customer_id = customer_id;
+		this.customer = customer_id;
 	}
 
 	public int getCC() {
@@ -156,19 +159,19 @@ public class Vehicle {
 		this.owner_surname = owner_surname;
 	}
 
-	public int getCustomer_id() {
-		return customer_id;
+	public Customer getCustomer_id() {
+		return customer;
 	}
 
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomer_id(Customer customer_id) {
+		this.customer = customer_id;
 	}
 
 	@Override
 	public String toString() {
 		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
 				+ Type + ", date=" + date + ", owner_name=" + owner_name + ", owner_surname=" + owner_surname
-				+ ", customer_id=" + customer_id + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + "]";
+				+ ", customer_id=" + customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + "]";
 	}
 
 }

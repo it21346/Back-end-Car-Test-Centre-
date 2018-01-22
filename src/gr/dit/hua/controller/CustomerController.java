@@ -100,6 +100,7 @@ public class CustomerController {
 		// fields given
 		if (customerService.exists(customer) == false) {
 			// save the customer using the service
+			System.out.println(customer.toString());
 			customerService.updateCustomer(customer);
 			return "redirect:/customer/list";
 		} else {

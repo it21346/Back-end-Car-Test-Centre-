@@ -36,9 +36,8 @@ public class Customer implements Serializable {
 
 	@Column(name = "email")
 	private String email;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
+	
+	@OneToMany(mappedBy="customer",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Vehicle> vehicles;
 	
 	public Customer() {
