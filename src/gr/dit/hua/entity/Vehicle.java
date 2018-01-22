@@ -1,5 +1,6 @@
 package gr.dit.hua.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -42,7 +43,8 @@ public class Vehicle {
 	@Column(name = "owner_surname")
 	private String owner_surname;
 		
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 

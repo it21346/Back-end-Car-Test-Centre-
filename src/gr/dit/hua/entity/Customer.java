@@ -37,7 +37,8 @@ public class Customer implements Serializable {
 	@Column(name = "email")
 	private String email;
 	
-	@OneToMany(mappedBy="customer",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="customer",fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Vehicle> vehicles;
 	
 	public Customer() {
@@ -96,11 +97,12 @@ public class Customer implements Serializable {
 		return "Customer [ID=" + ID + ", name=" + name + ", surname=" + surname + ", email=" + email + "]";
 	}
 	
-	public void addVehicle(Vehicle vehicle) {
+	public void addVehicle(Vehicle avehicle) {
 		if(vehicles == null) {
 			vehicles = new ArrayList<>();
-		}
-		vehicles.add(vehicle);
+		}		
+		vehicles.add(avehicle);
+		avehicle.setCustomer_id(this);
 	}
 	
 }
