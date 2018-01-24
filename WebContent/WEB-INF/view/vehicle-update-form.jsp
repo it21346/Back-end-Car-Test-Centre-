@@ -2,11 +2,11 @@
 
 <div class="ui segment">
 
-	<h3>Update Vehicle for Customer:${vehicle.owner_name}
-		${vehicle.owner_surname}</h3>
+	<h3>Update Vehicle for Customer:${vehicle.getCustomer().name}&emsp; ${vehicle.getCustomer().surname}
+		</h3>
 
 	<form:form
-		action="${pageContext.request.contextPath}/vehicle/updateVehicle"
+		action="${pageContext.request.contextPath}/vehicle/updateVehicle/${vehicle.getCustomer().ID}/${vehicle.ID}"
 		modelAttribute="vehicle" method="POST" id="vehicleForm"
 		class="ui form">
 		<div class="field">
@@ -40,7 +40,7 @@
 		</div>		
 		<div class="field">
 			<label>Owner ID</label> <input type="number" name="customer_id"
-				value="${vehicle.customer_id}" readonly="readonly">
+				value="${vehicle.getCustomer().ID}" readonly="readonly">
 		</div>
 		<div class="field">
 			<label>Vehicle ID</label> <input type="number" name="vehicle_id"
@@ -51,7 +51,7 @@
 
 	</form:form>
 	<form:form
-		action="${pageContext.request.contextPath}/vehicle/cancel/${vehicle.customer_id}"
+		action="${pageContext.request.contextPath}/vehicle/cancel/${vehicle.getCustomer().ID}"
 		method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>
