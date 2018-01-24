@@ -18,7 +18,7 @@
 		</div>
 		<div class="field">
 			<label>Date</label>
-			<form:input path="date" />
+			<form:input path="date" placeholder="YYYY-MM-DD"/>
 		</div>
 		<div class="field">
 			<label>CC</label>

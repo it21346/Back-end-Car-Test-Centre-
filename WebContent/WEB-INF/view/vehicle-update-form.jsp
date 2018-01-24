@@ -39,14 +39,6 @@
 			</select>
 		</div>		
 		<div class="field">
-			<label>Owner Name</label> <input type="text" name="owner_name"
-				value="${vehicle.owner_name}" readonly="readonly">
-		</div>
-		<div class="field">
-			<label>Owner Surname</label> <input type="text" name="owner_surname"
-				value="${vehicle.owner_surname}" readonly="readonly">
-		</div>
-		<div class="field">
 			<label>Owner ID</label> <input type="number" name="customer_id"
 				value="${vehicle.customer_id}" readonly="readonly">
 		</div>

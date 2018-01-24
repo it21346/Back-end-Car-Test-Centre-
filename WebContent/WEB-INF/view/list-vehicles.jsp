@@ -1,6 +1,6 @@
 <div class="ui segment">
 	<h3>
-		List of Vehicles&emsp;&emsp;<a
+		List of Vehicles &emsp;&emsp;<a
 			href="${pageContext.request.contextPath}/vehicle/showAddVehicleForm/${customer_id}">
 			<i class="fa fa-caret-right" aria-hidden="true"></i>Add Vehicle
 		</a>
@@ -13,8 +13,6 @@
 			<th>Registration Number</th>
 			<th>Type</th>
 			<th>Date</th>
-			<th>Owner Name</th>
-			<th>Owner Surname</th>
 			<th>Time Of Arrival</th>
 			<th>Fee</th>
 			<th>CC</th>
@@ -30,8 +28,6 @@
 				<td>${tempVehicle.registration_number}</td>
 				<td>${tempVehicle.type}</td>
 				<td>${tempVehicle.date}</td>
-				<td>${tempVehicle.owner_name}</td>
-				<td>${tempVehicle.owner_surname}</td>
 				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
 				<td>${tempVehicle.fee}</td>
 				<td>${tempVehicle.cc}</td>

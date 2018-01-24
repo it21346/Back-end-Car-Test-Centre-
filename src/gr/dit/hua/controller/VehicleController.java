@@ -1,5 +1,6 @@
 package gr.dit.hua.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,28 +116,29 @@ public class VehicleController {
 			System.out.println("Vehicle already exists!");
 			model.addAttribute("error", "The Vehicle already exists.Please try again!");
 			model.addAttribute("customer_id", vehicle.getCustomer().getID());
-			model.addAttribute("customer_name", vehicle.getOwner_name());
-			model.addAttribute("customer_surname", vehicle.getOwner_surname());
 			return "vehicle-form";
 		}
 	}
 
 	@PostMapping("/fee/{cust_id}/{veh_id}")
 	public String calculateFee(@PathVariable("cust_id") int cust_id, @PathVariable("veh_id") int veh_id, Model model) {
+		System.out.println(cust_id);
 		float calculatedFee=0;
-		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
-		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
-			if(vehicle.getCc() <= 3 && vehicle.getCc() > 0) {					
-				calculatedFee = calculatedFee + 100;					
-			}else
-				calculatedFee = calculatedFee + 150;
-		}else 
-			if(vehicle.getCc() <= 1800 && vehicle.getCc() > 0){
-				calculatedFee = calculatedFee + 50;
-			}else 
-				calculatedFee = calculatedFee + 80;
-		
-		vehicleService.calculateFee(veh_id,calculatedFee);
+//		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
+//		String newDate = new SimpleDateFormat("yyyy.MM.dd").format(vehicle.getTIME_OF_ARRIVAL());
+//		System.out.println(newDate);
+//		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
+//			if(vehicle.getCc() <= 3 && vehicle.getCc() > 0) {					
+//				calculatedFee = calculatedFee + 100;					
+//			}else
+//				calculatedFee = calculatedFee + 150;
+//		}else 
+//			if(vehicle.getCc() <= 1800 && vehicle.getCc() > 0){
+//				calculatedFee = calculatedFee + 50;
+//			}else 
+//				calculatedFee = calculatedFee + 80;
+//		
+//		vehicleService.calculateFee(veh_id,calculatedFee);
 		return "redirect:/vehicle/listVehicles/"+cust_id;
 	}
 }

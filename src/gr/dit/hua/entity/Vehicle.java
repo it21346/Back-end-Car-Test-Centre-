@@ -36,12 +36,6 @@ public class Vehicle {
 
 	@Column(name = "date")
 	private String date;
-
-	@Column(name = "owner_name")
-	private String owner_name;
-
-	@Column(name = "owner_surname")
-	private String owner_surname;
 		
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
@@ -64,17 +58,6 @@ public class Vehicle {
 
 	}
 
-	public Vehicle(String model, String registration_number, type_of_vehicle type, String date, String owner_name,
-			String owner_surname, Customer customer_id) {
-		super();
-		this.model = model;
-		this.registration_number = registration_number;
-		Type = type;
-		this.date = date;
-		this.owner_name = owner_name;
-		this.owner_surname = owner_surname;
-		this.customer = customer_id;
-	}
 
 	public int getID() {
 		return ID;
@@ -114,22 +97,6 @@ public class Vehicle {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-
-	public String getOwner_name() {
-		return owner_name;
-	}
-
-	public void setOwner_name(String owner_name) {
-		this.owner_name = owner_name;
-	}
-
-	public String getOwner_surname() {
-		return owner_surname;
-	}
-
-	public void setOwner_surname(String owner_surname) {
-		this.owner_surname = owner_surname;
 	}
 
 	public Customer getCustomer() {
@@ -172,12 +139,29 @@ public class Vehicle {
 		this.status = status;
 	}
 
+	public Vehicle(int iD, String model, String registration_number, type_of_vehicle type, String date, int cc) {
+		super();
+		ID = iD;
+		this.model = model;
+		this.registration_number = registration_number;
+		Type = type;
+		this.date = date;
+		this.cc = cc;
+	}
+	public Vehicle(String model, String registration_number, type_of_vehicle type, String date, int cc) {
+		super();
+		this.model = model;
+		this.registration_number = registration_number;
+		Type = type;
+		this.date = date;
+		this.cc = cc;
+	}
+
 	@Override
 	public String toString() {
 		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
-				+ Type + ", date=" + date + ", owner_name=" + owner_name + ", owner_surname=" + owner_surname
-				+ ", customer=" + customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + ", cc=" + cc
-				+ ", status=" + status + "]";
+				+ Type + ", date=" + date + ", customer=" + customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee="
+				+ fee + ", cc=" + cc + ", status=" + status + "]";
 	}
 
 }
