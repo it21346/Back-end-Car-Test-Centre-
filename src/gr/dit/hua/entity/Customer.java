@@ -102,7 +102,7 @@ public class Customer implements Serializable {
 			vehicles = new ArrayList<>();
 		}		
 		vehicles.add(avehicle);
-		avehicle.setCustomer_id(this);
+		avehicle.setCustomer(this);
 	}
 	
 }

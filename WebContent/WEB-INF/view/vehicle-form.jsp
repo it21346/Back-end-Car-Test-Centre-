@@ -2,7 +2,7 @@
 <div class="ui segment">
 	<h3>Add a Vehicle</h3>
 	<form:form
-		action="${pageContext.request.contextPath}/vehicle/saveVehicle/${vehicle.getCustomer_id().ID}"
+		action="${pageContext.request.contextPath}/vehicle/saveVehicle/${vehicle.getCustomer().ID}"
 		modelAttribute="vehicle" method="POST" class="ui form">
 		<div class="field">
 			<label>Model</label>
@@ -22,16 +22,16 @@
 		</div>
 		<div class="field">
 			<label>CC</label>
-			<form:input path="CC" />
+			<form:input path="cc" />
 		</div>
 		<div class="field">
 			<label>Owner ID</label> <input type="number" name="customer_id"
-				value="${vehicle.getCustomer_id().getID()}" readonly="readonly">
+				value="${vehicle.getCustomer().getID()}" readonly="readonly">
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>
 	<form:form
-		action="${pageContext.request.contextPath}/vehicle/cancel/${customer_id}"
+		action="${pageContext.request.contextPath}/vehicle/cancel/${vehicle.getCustomer().ID}"
 		method="POST" class="ui form">
 		<button class="ui button" type="submit">Cancel</button>
 	</form:form>

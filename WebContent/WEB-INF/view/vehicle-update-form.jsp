@@ -27,7 +27,7 @@
 		</div>
 		<div class="field">
 			<label>CC</label>
-			<form:input path="CC" />
+			<form:input path="cc" />
 		</div>
 		<div class="field">
 			<label>Status</label> <select name="statusList" form="vehicleForm"

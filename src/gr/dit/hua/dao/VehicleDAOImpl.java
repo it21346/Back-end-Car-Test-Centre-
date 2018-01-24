@@ -31,7 +31,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 		// return the results
 		return vehicles;
 	}
-
+    @Override
 	public void saveVehicle(Vehicle vehicle) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();

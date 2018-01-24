@@ -34,7 +34,7 @@
 				<td>${tempVehicle.owner_surname}</td>
 				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
 				<td>${tempVehicle.fee}</td>
-				<td>${tempVehicle.CC}</td>
+				<td>${tempVehicle.cc}</td>
 				<td>${tempVehicle.status}</td>
 				<td><a
 					href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"

@@ -76,35 +76,6 @@ public class Vehicle {
 		this.customer = customer_id;
 	}
 
-	public int getCC() {
-		return cc;
-	}
-
-	public void setCC(int cc) {
-		this.cc = cc;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String Status) {
-		this.status = Status;
-	}
-	public float getFee() {
-		return fee;
-	}
-
-	public void setFee(float fee) {
-		this.fee = fee;
-	}
-
-	public String getTIME_OF_ARRIVAL() {
-		return TIME_OF_ARRIVAL;
-	}
-
-	public void setTIME_OF_ARRIVAL(String tIME_OF_ARRIVAL) {
-		TIME_OF_ARRIVAL = tIME_OF_ARRIVAL;
-	}
-
 	public int getID() {
 		return ID;
 	}
@@ -161,19 +132,52 @@ public class Vehicle {
 		this.owner_surname = owner_surname;
 	}
 
-	public Customer getCustomer_id() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer_id(Customer customer_id) {
-		this.customer = customer_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public String getTIME_OF_ARRIVAL() {
+		return TIME_OF_ARRIVAL;
+	}
+
+	public void setTIME_OF_ARRIVAL(String tIME_OF_ARRIVAL) {
+		TIME_OF_ARRIVAL = tIME_OF_ARRIVAL;
+	}
+
+	public float getFee() {
+		return fee;
+	}
+
+	public void setFee(float fee) {
+		this.fee = fee;
+	}
+
+	public int getCc() {
+		return cc;
+	}
+
+	public void setCc(int cc) {
+		this.cc = cc;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
 				+ Type + ", date=" + date + ", owner_name=" + owner_name + ", owner_surname=" + owner_surname
-				+ ", customer_id=" + customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + "]";
+				+ ", customer=" + customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + ", cc=" + cc
+				+ ", status=" + status + "]";
 	}
 
 }

@@ -52,14 +52,14 @@ public class VehicleController {
 		// create model attribute to get form data
 		Vehicle vehicle = new Vehicle();
 		Customer customer = customerService.getCustomer(ID);
-		vehicle.setCustomer_id(customer);
+		vehicle.setCustomer(customer);
 		model.addAttribute("vehicle", vehicle);		
 		// add page title
 		model.addAttribute("pageTitle", "Add Vehicle");
 		return "vehicle-form";
 	}
 
-	@GetMapping("delete/{customer_id}/{vehicle_id}")
+	@GetMapping("/delete/{customer_id}/{vehicle_id}")
 	public String deleteVehicle(@PathVariable("vehicle_id") int vehicle_id,
 			@PathVariable("customer_id") int customer_id, Model model) {
 		vehicleService.deleteVehicle(vehicle_id);
@@ -67,7 +67,7 @@ public class VehicleController {
 		return "redirect:/vehicle/listVehicles/" + customer_id;
 	}
 
-	@GetMapping("showUpdateForm/{ID}")
+	@GetMapping("/showUpdateForm/{ID}")
 	public String showUpdateForm(@PathVariable("ID") int ID, Model model) {
 		// create model attribute to get form data
 		Vehicle vehicle = new Vehicle();
@@ -89,7 +89,7 @@ public class VehicleController {
 		if (vehicleService.exists(vehicle) == false) {
 			// save the vehicle using the service
 			vehicleService.updateVehicle(vehicle);
-			return "redirect:/vehicle/listVehicles/" + vehicle.getCustomer_id();
+			return "redirect:/vehicle/listVehicles/" + vehicle.getCustomer().getID();
 		} else {
 			System.out.println("Vehicle already exists!");
 			model.addAttribute("error", "The Vehicle already exists.Please try again!");
@@ -99,28 +99,26 @@ public class VehicleController {
 
 	}
 
-	@PostMapping("/saveVehicle/{cust_ID}")
-	public String saveVehicle(@PathVariable("cust_ID") int cust_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
-		
+	@PostMapping("/saveVehicle/{ID}")
+	public String saveVehicle(@PathVariable("ID") int cust_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
 		vehicle.setStatus("Pending");
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
 		if (vehicleService.exists(vehicle) == false) {
 			Customer cust = customerService.getCustomer(cust_ID);
-			vehicle.setCustomer_id(cust);
+			vehicle.setCustomer(cust);
 			// new customer,add using the service
 			vehicleService.saveVehicle(vehicle);
 			return "redirect:/vehicle/listVehicles/" + cust_ID;
 		} else {
 			System.out.println("Vehicle already exists!");
 			model.addAttribute("error", "The Vehicle already exists.Please try again!");
-			model.addAttribute("customer_id", vehicle.getCustomer_id());
+			model.addAttribute("customer_id", vehicle.getCustomer().getID());
 			model.addAttribute("customer_name", vehicle.getOwner_name());
 			model.addAttribute("customer_surname", vehicle.getOwner_surname());
 			return "vehicle-form";
 		}
-
 	}
 
 	@PostMapping("/fee/{cust_id}/{veh_id}")
@@ -128,12 +126,12 @@ public class VehicleController {
 		float calculatedFee=0;
 		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
 		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
-			if(vehicle.getCC() <= 3 && vehicle.getCC() > 0) {					
+			if(vehicle.getCc() <= 3 && vehicle.getCc() > 0) {					
 				calculatedFee = calculatedFee + 100;					
 			}else
 				calculatedFee = calculatedFee + 150;
 		}else 
-			if(vehicle.getCC() <= 1800 && vehicle.getCC() > 0){
+			if(vehicle.getCc() <= 1800 && vehicle.getCc() > 0){
 				calculatedFee = calculatedFee + 50;
 			}else 
 				calculatedFee = calculatedFee + 80;
