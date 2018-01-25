@@ -1,5 +1,7 @@
 package gr.dit.hua.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "vehicle")
-public class Vehicle {
+public class Vehicle implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -40,6 +49,7 @@ public class Vehicle {
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "customer_id")
+	@JsonIgnore
 	private Customer customer;
 
 	@Column(name = "TIME_OF_ARRIVAL")
@@ -157,11 +167,12 @@ public class Vehicle {
 		this.cc = cc;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
-				+ Type + ", date=" + date + ", customer=" + customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee="
-				+ fee + ", cc=" + cc + ", status=" + status + "]";
+				+ Type + ", date=" + date + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + ", cc=" + cc
+				+ ", status=" + status + "]";
 	}
 
 }

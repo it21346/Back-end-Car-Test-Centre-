@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import gr.dit.hua.entity.Customer;
 import gr.dit.hua.entity.Vehicle;
 
 @Repository
@@ -17,7 +16,6 @@ public class VehicleDAOImpl implements VehicleDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@SuppressWarnings("deprecation")
 	public List<Vehicle> getVehicles(int ID) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
