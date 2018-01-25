@@ -3,7 +3,7 @@
 	<h3>Add a Vehicle</h3>
 	<form:form
 		action="${pageContext.request.contextPath}/vehicle/saveVehicle/${vehicle.getCustomer().ID}"
-		modelAttribute="vehicle" method="POST" class="ui form">
+		modelAttribute="vehicle" method="POST" id="vehicleForm" class="ui form">
 		<div class="field">
 			<label>Model</label>
 			<form:input path="model" />
@@ -18,11 +18,17 @@
 		</div>
 		<div class="field">
 			<label>Date</label>
-			<form:input path="date" placeholder="YYYY-MM-DD"/>
+			<form:input path="date" placeholder="YYYY-MM-DD" />
 		</div>
 		<div class="field">
 			<label>CC</label>
 			<form:input path="cc" />
+		</div>
+		<div class="field">
+			<label>Insurance</label> <select name="insurance" form="vehicleForm">
+				<option value="Valid">Valid</option>
+				<option value="Invalid">Invalid</option>
+			</select>
 		</div>
 		<div class="field">
 			<label>Owner ID</label> <input type="number" name="customer_id"

@@ -55,7 +55,7 @@ public class VehicleController {
 	}
 
 	@GetMapping("/showAddVehicleForm/{ID}")
-	public String showAddVehicleForm(@PathVariable("ID") int ID, Model model) {
+	public String showAddVehicleForm(@PathVariable("ID") int ID, Model model) {		
 		// create model attribute to get form data
 		Vehicle vehicle = new Vehicle();
 		Customer customer = customerService.getCustomer(ID);
@@ -118,16 +118,17 @@ public class VehicleController {
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
+		
 		if (vehicleService.exists(vehicle) == false) {
 			Customer cust = customerService.getCustomer(cust_ID);
 			vehicle.setCustomer(cust);
 			// new customer,add using the service
-			vehicleService.saveVehicle(vehicle);
+			vehicleService.saveVehicle(vehicle);			
 			return "redirect:/vehicle/listVehicles/" + cust_ID;
 		} else {
 			System.out.println("Vehicle already exists!");
 			model.addAttribute("error", "The Vehicle already exists.Please try again!");
-			model.addAttribute("customer_id", vehicle.getCustomer().getID());
+			model.addAttribute("customer_id", vehicle.getCustomer().getID());			
 			return "vehicle-form";
 		}
 	}

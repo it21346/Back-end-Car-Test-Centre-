@@ -26,16 +26,21 @@
 			<form:input path="date" />
 		</div>
 		<div class="field">
-			<label>CC</label>
+			<label>Insurance</label> <select name="insurance" form="vehicleForm">
+				<option value="Valid">Valid</option>
+				<option value="Invalid">Invalid</option>
+			</select>
+		</div>
+		<div class="field">
+			<label>CC/Tons</label>
 			<form:input path="cc" />
 		</div>
 		<div class="field">
 			<label>Status</label> <select name="statusList" form="vehicleForm"
 				id="selected">
-				<option value="Pending">Pending</option>
-				<option value="Fix">Needs to Fix issues</option>
-				<option value="Insurance">Insurance Invalid</option>
-				<option value="Control">Control</option>
+				<option value="Check Pending">Check Pending</option>
+				<option value="Needs to Fix issues">Needs to Fix issues</option>
+				<option value="Check Completed">Check Completed</option>
 			</select>
 		</div>		
 		<div class="field">

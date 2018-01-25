@@ -14,7 +14,9 @@
 			<th>Last Name</th>
 			<th>Email</th>
 			<th>Vehicles</th>
-			<th>Action</th>
+			<sec:authorize access="hasRole('ROLE_SECRETARY')">
+				<th>Action</th>
+			</sec:authorize>
 		</thead>
 		<!-- loop over and print our customers -->
 		<c:forEach var="tempCustomer" items="${customers}">
@@ -23,14 +25,27 @@
 				<td>${tempCustomer.name}</td>
 				<td>${tempCustomer.surname}</td>
 				<td>${tempCustomer.email}</td>
-				<td>${tempCustomer.vehicles.size()}<br><br> <a
-					href="${pageContext.request.contextPath}/vehicle/listVehicles/${tempCustomer.ID}"> <i class="fa fa-search-plus" aria-hidden="true"></i> Details </a>
-				</td>			
-				<td><a
-					href="${pageContext.request.contextPath}/customer/delete/${tempCustomer.ID}" onclick="return confirm('Are you sure you want to delete?')">
-						<i class="fa fa-times" aria-hidden="true"></i> Delete </a><br></br><a
-					href="${pageContext.request.contextPath}/vehicle/showAddVehicleForm/${tempCustomer.ID}">
-						<i class="fa fa-car" aria-hidden="true"></i> AddVehicle </a><br></br><a href="${pageContext.request.contextPath}/customer/showUpdateForm/${tempCustomer.ID}" > <i class="fa fa-refresh" aria-hidden="true"></i> Update</a></td>
+				<td>${tempCustomer.vehicles.size()}<br>
+				<br> <a
+					href="${pageContext.request.contextPath}/vehicle/listVehicles/${tempCustomer.ID}">
+						<i class="fa fa-search-plus" aria-hidden="true"></i> Details
+				</a>
+				</td>
+				<sec:authorize access="hasRole('ROLE_SECRETARY')">
+					<td><a
+						href="${pageContext.request.contextPath}/customer/delete/${tempCustomer.ID}"
+						onclick="return confirm('Are you sure you want to delete?')">
+							<i class="fa fa-times" aria-hidden="true"></i> Delete
+					</a><br></br>
+					<a
+						href="${pageContext.request.contextPath}/vehicle/showAddVehicleForm/${tempCustomer.ID}">
+							<i class="fa fa-car" aria-hidden="true"></i> AddVehicle
+					</a><br></br>
+					<a
+						href="${pageContext.request.contextPath}/customer/showUpdateForm/${tempCustomer.ID}">
+							<i class="fa fa-refresh" aria-hidden="true"></i> Update
+					</a></td>
+				</sec:authorize>
 			</tr>
 		</c:forEach>
 	</table>

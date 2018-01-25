@@ -30,24 +30,29 @@
 				<td>${tempVehicle.date}</td>
 				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
 				<c:if test="${not empty fee}">
-				<td>${fee}</td>
-		        </c:if>
-		        <c:if test="${empty fee}">
-				<td>${tempVehicle.fee}</td>
+					<td>${fee}</td>
+				</c:if>
+				<c:if test="${empty fee}">
+					<td>${tempVehicle.fee}</td>
 				</c:if>
 				<td>${tempVehicle.cc}</td>
 				<td>${tempVehicle.status}</td>
-				<td><a
-					href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"
-					onclick="return confirm('Are you sure you want to delete?')"> <i
-						class="fa fa-times" aria-hidden="true"></i> Delete
-				</a><br></br> <a
-					href="${pageContext.request.contextPath}/vehicle/showUpdateForm/${customer_id}/${tempVehicle.ID}"><i
-						class="fa fa-refresh" aria-hidden="true"></i> Update</a><br></br>
+
+				<td><sec:authorize access="hasRole('ROLE_SECRETARY')">
+						<a
+							href="${pageContext.request.contextPath}/vehicle/delete/${customer_id}/${tempVehicle.ID}"
+							onclick="return confirm('Are you sure you want to delete?')">
+							<i class="fa fa-times" aria-hidden="true"></i> Delete
+						</a>
+					</sec:authorize> <br></br> <sec:authorize access="hasRole('ROLE_ENGINEER')">
+						<a
+							href="${pageContext.request.contextPath}/vehicle/showUpdateForm/${customer_id}/${tempVehicle.ID}"><i
+							class="fa fa-refresh" aria-hidden="true"></i> Update</a>
+					</sec:authorize><br></br>
 					<form
 						action="${pageContext.request.contextPath}/vehicle/fee/${customer_id}/${tempVehicle.ID}"
-						method="GET">						
-					<button type="submit" name="fee">Fee</button>
+						method="GET">
+						<button type="submit" name="fee">Fee</button>
 					</form>
 			</tr>
 		</c:forEach>

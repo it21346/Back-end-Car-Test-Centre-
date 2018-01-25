@@ -79,8 +79,11 @@
 	<nav class="ui fixed menu teal inverted navbar">
 		<a href="" class="brand item">Customers</a> <a
 			href="${pageContext.request.contextPath}/customer/list" class="item">List
-			All</a> <a href="${pageContext.request.contextPath}/customer/showAddForm"
-			class="item">Add</a>
+			All</a>
+		<sec:authorize access="hasRole('ROLE_SECRETARY')">
+			<a href="${pageContext.request.contextPath}/customer/showAddForm"
+				class="item">Add</a>
+		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
         Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
 			<sec:authentication property="principal.authorities" />
