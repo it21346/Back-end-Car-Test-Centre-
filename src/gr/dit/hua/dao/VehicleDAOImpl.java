@@ -74,11 +74,13 @@ public class VehicleDAOImpl implements VehicleDAO {
 	public boolean exists(Vehicle vehicle) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<?> query = currentSession.createQuery(
-				"select 1 from Vehicle v where  v.registration_number= :key and v.model = :key1 and v.Type= :key2 and v.date = :key3");
+				"select 1 from Vehicle v where  v.registration_number= :key and v.model = :key1 and v.Type= :key2 and v.date = :key3 and v.status = :key4 and v.cc = :key5");
 		query.setString("key", vehicle.getRegistration_number());
 		query.setString("key1", vehicle.getModel());
 		query.setString("key2", vehicle.getType().name());
 		query.setString("key3", vehicle.getDate());
+		query.setString("key4", vehicle.getStatus());
+		query.setLong("key5", vehicle.getCc());
 		return (query.uniqueResult() != null);
 
 	}

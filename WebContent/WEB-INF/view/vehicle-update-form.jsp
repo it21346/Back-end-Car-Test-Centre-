@@ -46,7 +46,7 @@
 			<label>Vehicle ID</label> <input type="number" name="vehicle_id"
 				value="${vehicle.ID}" readonly="readonly">
 		</div>
-
+		<input name="fee" id="fee_price" type="number" hidden="hidden" value="${vehicle.fee}">
 		<button class="ui button" type="submit">Save</button>
 
 	</form:form>

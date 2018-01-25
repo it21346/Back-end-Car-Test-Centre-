@@ -29,7 +29,12 @@
 				<td>${tempVehicle.type}</td>
 				<td>${tempVehicle.date}</td>
 				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
+				<c:if test="${not empty fee}">
+				<td>${fee}</td>
+		        </c:if>
+		        <c:if test="${empty fee}">
 				<td>${tempVehicle.fee}</td>
+				</c:if>
 				<td>${tempVehicle.cc}</td>
 				<td>${tempVehicle.status}</td>
 				<td><a
@@ -41,7 +46,7 @@
 						class="fa fa-refresh" aria-hidden="true"></i> Update</a><br></br>
 					<form
 						action="${pageContext.request.contextPath}/vehicle/fee/${customer_id}/${tempVehicle.ID}"
-						method="post">						
+						method="GET">						
 					<button type="submit" name="fee">Fee</button>
 					</form>
 			</tr>

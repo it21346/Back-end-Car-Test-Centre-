@@ -1,6 +1,12 @@
 package gr.dit.hua.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +88,7 @@ public class VehicleController {
 	}
 
 	@PostMapping("/updateVehicle/{cust_ID}/{veh_ID}")
-	public String updateVehicle(String statusList,@PathVariable("cust_ID") int cust_ID,@PathVariable("veh_ID") int veh_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
-		System.out.println("THE LIST SELECTED THE :"+statusList);
+	public String updateVehicle(Float fee_price,String statusList,@PathVariable("cust_ID") int cust_ID,@PathVariable("veh_ID") int veh_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
 		vehicle.setStatus(statusList);
 		vehicle.setID(veh_ID);
 		if (vehicle.getDate() == "") {
@@ -97,8 +102,11 @@ public class VehicleController {
 			return "redirect:/vehicle/listVehicles/" + vehicle.getCustomer().getID();
 		} else {
 			System.out.println("Vehicle already exists!");
-			model.addAttribute("error", "The Vehicle already exists.Please try again!");
+			model.addAttribute("errorr", "The Vehicle already exists.Please try again!");
+			Customer cust = customerService.getCustomer(cust_ID);
+			vehicle.setCustomer(cust);
 			model.addAttribute("vehicle",vehicle);
+			model.addAttribute("fee",fee_price);
 			return "vehicle-update-form";
 		}
 
@@ -124,25 +132,59 @@ public class VehicleController {
 		}
 	}
 
-	@PostMapping("/fee/{cust_id}/{veh_id}")
-	public String calculateFee(@PathVariable("cust_id") int cust_id, @PathVariable("veh_id") int veh_id, Model model) {
-		System.out.println(cust_id);
+	@GetMapping("/fee/{cust_id}/{veh_id}")
+	public String calculateFee(@PathVariable("cust_id") int cust_id, @PathVariable("veh_id") int veh_id, Model model) throws ParseException {
 		float calculatedFee=0;
-//		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
-//		String newDate = new SimpleDateFormat("yyyy.MM.dd").format(vehicle.getTIME_OF_ARRIVAL());
-//		System.out.println(newDate);
-//		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
-//			if(vehicle.getCc() <= 3 && vehicle.getCc() > 0) {					
-//				calculatedFee = calculatedFee + 100;					
-//			}else
-//				calculatedFee = calculatedFee + 150;
-//		}else 
-//			if(vehicle.getCc() <= 1800 && vehicle.getCc() > 0){
-//				calculatedFee = calculatedFee + 50;
-//			}else 
-//				calculatedFee = calculatedFee + 80;
-//		
-//		vehicleService.calculateFee(veh_id,calculatedFee);
+		
+		Vehicle vehicle  = vehicleService.getVehicle(veh_id);
+//https://stackoverflow.com/questions/10649782/java-cannot-format-given-object-as-a-date
+		DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		String inputText = vehicle.getTIME_OF_ARRIVAL();	
+		Date date = inputFormat.parse(inputText);		
+		String outputText = outputFormat.format(date);
+//https://stackoverflow.com/questions/30207693/how-to-check-if-date-exceeds-more-than-seven-days
+		LocalDate from = LocalDate.parse(vehicle.getDate());
+		LocalDate to = LocalDate.parse(outputText);
+		long days = ChronoUnit.DAYS.between(from, to);
+		System.out.println("1:"+calculatedFee);
+		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
+			System.out.println("2:"+calculatedFee);
+			if(vehicle.getCc() <= 3 && vehicle.getCc() > 0) {					
+				calculatedFee = calculatedFee + 100;
+				System.out.println("3:"+calculatedFee);
+				if (days > 730) {
+					calculatedFee = (float) (calculatedFee + (0.5*100));
+					System.out.println("4:"+calculatedFee);
+				}
+			}else {
+				calculatedFee = calculatedFee + 150;
+		
+			    if (days > 730) {
+				calculatedFee = (float) (calculatedFee + (0.5*150));
+				System.out.println("6:"+calculatedFee);
+			    }
+			}    
+		}else {
+			if(vehicle.getCc() <= 1800 && vehicle.getCc() > 0){
+				calculatedFee = calculatedFee + 50;
+				System.out.println("7:"+calculatedFee);
+				if (days > 730) {
+					calculatedFee = (float) (calculatedFee + (0.5*50));
+					System.out.println("8:"+calculatedFee);
+				}
+			}else {
+				calculatedFee = calculatedFee + 80;
+				System.out.println("9:"+calculatedFee);
+		
+				if (days > 730) {
+					calculatedFee = (float) (calculatedFee + (0.5*80));
+					System.out.println("10:"+calculatedFee);
+				}
+			}
+		}	
+		
+		vehicleService.calculateFee(veh_id,calculatedFee);
 		return "redirect:/vehicle/listVehicles/"+cust_id;
 	}
 }
