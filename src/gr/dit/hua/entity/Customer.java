@@ -40,6 +40,10 @@ public class Customer implements Serializable {
             CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Vehicle> vehicles;
 	
+	@OneToMany(mappedBy="customer",fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Appointment> appointments;
+	
 	public Customer() {
 		
 	}
@@ -90,6 +94,15 @@ public class Customer implements Serializable {
 	public void setVehicles(Vehicle vehicle) {	
 		vehicles.add(vehicle);	
 	}
+	
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
 
 	@Override
 	public String toString() {
@@ -102,6 +115,14 @@ public class Customer implements Serializable {
 		}		
 		vehicles.add(avehicle);
 		avehicle.setCustomer(this);
+	}
+	
+	public void addAppointment(Appointment anappointment) {
+		if(appointments == null) {
+			appointments = new ArrayList<>();
+		}		
+		appointments.add(anappointment);
+		anappointment.setCustomer(this);
 	}
 	
 }
