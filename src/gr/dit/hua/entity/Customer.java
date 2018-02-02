@@ -40,6 +40,7 @@ public class Customer implements Serializable {
             CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Vehicle> vehicles;
 	
+	
 	public Customer() {
 		
 	}
