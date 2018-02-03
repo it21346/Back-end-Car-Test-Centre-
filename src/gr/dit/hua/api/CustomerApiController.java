@@ -74,8 +74,10 @@ public class CustomerApiController {
 
 	@RequestMapping(value = "/appointment", method = RequestMethod.POST, produces = { "application/json",
 			"application/xml" })
-	public Appointment createAppointment(@RequestParam("ID") int customer_ID, @RequestParam("date") String date) {
+	public Appointment createAppointment(@RequestParam("customer_id") int customer_ID, @RequestParam("date") String date) {
 		Appointment appointment = new Appointment(date);
+		appointment.setCustomer_appoint(customerService.getCustomer(customer_ID));
+		appointment.setStatus("Unckecked");
 		customerService.saveAppointment(appointment);
 		return appointment;
 	}
