@@ -1,6 +1,8 @@
 package gr.dit.hua.service;
 
 import java.util.List;
+
+import gr.dit.hua.entity.Appointment;
 import gr.dit.hua.entity.Customer;
 
 public interface CustomerService {
@@ -15,5 +17,9 @@ public interface CustomerService {
 	public void deleteCustomer(int iD);
 
 	public boolean exists(Customer customer);
+
+	public List<Appointment> getAppointments();
+
+	public void saveAppointment(Appointment appointment);
 
 }

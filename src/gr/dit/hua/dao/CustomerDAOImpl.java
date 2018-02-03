@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import gr.dit.hua.dao.CustomerDAO;
+import gr.dit.hua.entity.Appointment;
 import gr.dit.hua.entity.Customer;
 
 @Repository
@@ -80,5 +81,26 @@ public class CustomerDAOImpl implements CustomerDAO {
 		query.setString("key2", customer.getSurname());
 		query.setString("key3", customer.getEmail());
 		return (query.uniqueResult() != null);
+	}
+
+	@Override
+	public List<Appointment> getAppointments() {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		// create a query
+		Query<Appointment> query = currentSession.createQuery("from Appointment order by date", Appointment.class);
+		// execute the query and get the results list
+		List<Appointment> appointments = query.getResultList();
+
+		// return the results
+		return appointments;
+	}
+
+	@Override
+	public void saveAppointment(Appointment appointment) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		// save the appointment
+		currentSession.save(appointment);
 	}
 }

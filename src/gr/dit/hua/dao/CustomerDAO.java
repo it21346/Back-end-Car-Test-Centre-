@@ -2,6 +2,7 @@ package gr.dit.hua.dao;
 
 import java.util.List;
 
+import gr.dit.hua.entity.Appointment;
 import gr.dit.hua.entity.Customer;
 
 public interface CustomerDAO {
@@ -16,4 +17,8 @@ public interface CustomerDAO {
 	public void updateCustomer(Customer customer);
 
 	public boolean exists(Customer customer);
+
+	public List<Appointment> getAppointments();
+
+	public void saveAppointment(Appointment appointment);
 }

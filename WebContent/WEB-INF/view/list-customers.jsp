@@ -2,8 +2,8 @@
 
 <div class="ui segment">
 	<h3>
-		List of Customers <input type="text" id="search"> <input
-			type="button" id="button"
+		List of Customers <input type="text" style="float: right;" id="search"> <input
+			type="button" id="button" style="float: right;"
 			onmousedown="doSearch(document.getElementById('search').value)"
 			value="Find">
 	</h3>

@@ -85,6 +85,11 @@ public class Appointment implements Serializable {
 		this.customer_appoint = customer_appoint;
 	}
 
+	public Appointment(String date) {
+		super();
+		this.date = date;
+	}
+
 	
 }
 	

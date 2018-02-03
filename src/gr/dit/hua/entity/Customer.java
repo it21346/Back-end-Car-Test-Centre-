@@ -40,6 +40,9 @@ public class Customer implements Serializable {
             CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Vehicle> vehicles;
 	
+	@OneToMany(mappedBy="customer_appoint", cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Appointment> appointments;
 	
 	public Customer() {
 		

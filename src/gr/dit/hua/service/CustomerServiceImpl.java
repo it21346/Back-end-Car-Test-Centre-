@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gr.dit.hua.dao.CustomerDAO;
+import gr.dit.hua.entity.Appointment;
 import gr.dit.hua.entity.Customer;
 
 @Service
@@ -51,6 +52,18 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public boolean exists(Customer customer) {
 		 return customerDAO.exists(customer);
+	}
+
+	@Override
+	@Transactional
+	public List<Appointment> getAppointments() {
+		return customerDAO.getAppointments();
+	}
+
+	@Override
+	@Transactional
+	public void saveAppointment(Appointment appointment) {
+		customerDAO.saveAppointment(appointment);	
 	}
 	
 }

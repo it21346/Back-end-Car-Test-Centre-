@@ -81,14 +81,17 @@
 			href="${pageContext.request.contextPath}/customer/list" class="item">List
 			All</a>
 		<sec:authorize access="hasRole('ROLE_SECRETARY')">
+
 			<a href="${pageContext.request.contextPath}/customer/showAddForm"
 				class="item">Add</a>
+			<a href="${pageContext.request.contextPath}/customer/appointments" class="item">Appointments</a>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
         Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
 			<sec:authentication property="principal.authorities" />
-			<a id="logout-nav" class="item" name="logout-nav"> <i
-				class="fa fa-sign-out" aria-hidden="true"></i> Logout
+			<a id="logout-nav" class="item" style="float: right;" name="logout-nav"> <i
+				class="fa fa-sign-out" aria-hidden="true"></i>
+				Logout
 			</a>
 		</sec:authorize>
 	</nav>

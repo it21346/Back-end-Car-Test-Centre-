@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import gr.dit.hua.entity.Appointment;
+import gr.dit.hua.entity.AppointmentList;
 import gr.dit.hua.entity.Customer;
 import gr.dit.hua.entity.CustomerList;
 import gr.dit.hua.service.CustomerService;
@@ -19,26 +21,33 @@ import gr.dit.hua.service.CustomerService;
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerApiController {
-	
+
 	@Autowired
-	private  CustomerService customerService;
-	
+	private CustomerService customerService;
+
 	@Autowired
 	private CustomerList customerList;
+
+	@Autowired
+	private AppointmentList appointmentList;
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
 	public Customer getCustomer(@PathVariable("id") int id) {
-		
+
 		Customer customer = customerService.getCustomer(id);
 		System.out.println("customer :" + customer);
-		
+
 		return customer;
 	}
+
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value="/delete/{id}", method= RequestMethod.DELETE, produces = { "application/json", "application/xml" })
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = { "application/json",
+			"application/xml" })
 	public ResponseEntity deleteCustomer(@PathVariable("id") int id) {
 		customerService.deleteCustomer(id);
 		return new ResponseEntity(HttpStatus.OK);
-	}	
+	}
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
 	public CustomerList getCustomers() {
 
@@ -47,16 +56,36 @@ public class CustomerApiController {
 		this.customerList.setCustomerList(customers);
 		return this.customerList;
 	}
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json", "application/xml" })
-	public Customer createCustomer(@RequestParam("name") String firstName,
-			@RequestParam("surname") String lastName, @RequestParam("email") String email) {
+	public Customer createCustomer(@RequestParam("name") String firstName, @RequestParam("surname") String lastName,
+			@RequestParam("email") String email) {
 		Customer customer = new Customer(firstName, lastName, email);
 		customerService.saveCustomer(customer);
 		return customer;
 	}
-	@RequestMapping(value = "/jsonadd", method = RequestMethod.POST,  produces = { "application/json", "application/xml" })
+
+	@RequestMapping(value = "/jsonadd", method = RequestMethod.POST, produces = { "application/json",
+			"application/xml" })
 	public Customer createCustomerfromJson(@RequestBody Customer customer) {
 		customerService.saveCustomer(customer);
 		return customer;
+	}
+
+	@RequestMapping(value = "/appointment", method = RequestMethod.POST, produces = { "application/json",
+			"application/xml" })
+	public Appointment createAppointment(@RequestParam("ID") int customer_ID, @RequestParam("date") String date) {
+		Appointment appointment = new Appointment(date);
+		customerService.saveAppointment(appointment);
+		return appointment;
+	}
+
+	@RequestMapping(value = "/allAppointments", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
+	public AppointmentList getAppointments() {
+
+		List<Appointment> appointments = customerService.getAppointments();
+		System.out.println("appointments :" + appointments);
+		this.appointmentList.setAppointmentList(appointments);
+		return this.appointmentList;
 	}
 }
