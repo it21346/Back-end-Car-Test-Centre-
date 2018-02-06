@@ -9,11 +9,11 @@
 		modelAttribute="appointment" method="POST" class="ui form">
 		<div class="field">
 			<label>Name</label>
-			<input value="${appointment.customer_appoint.getName()}" />
+			<form:input path="customer_appoint.name" value="${appointment.customer_appoint.getName()}" readonly="true"/>
 		</div>
 		<div class="field">
 			<label>Surname</label>
-			<input value="${appointment.customer_appoint.getSurname()}" />
+			<form:input path="customer_appoint.surname" value="${appointment.customer_appoint.getSurname()}" readonly="true"/>
 		</div>
 		<div class="field">
 			<label>Date</label>
@@ -23,6 +23,7 @@
 			<label>Status</label>
 			<form:radiobutton name="checked" value="Checked" path="status"/>Checked
 			<form:radiobutton  name="unchecked" value="Unchecked" path="status"/>Unchecked
+			<form:radiobutton  name="completed" value="Completed" path="status"/>Completed
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>

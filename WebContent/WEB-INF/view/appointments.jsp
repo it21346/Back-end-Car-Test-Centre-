@@ -14,7 +14,8 @@
 			<td>${tempAppointment.getCustomer_appoint().getSurname()}</td>
 			<td>${tempAppointment.date}</td>
 			<td>${tempAppointment.status}</td>
-			<td><a href="${pageContext.request.contextPath}/customer/showAppointmentUpdateForm/${tempAppointment.ID}" >Update</a></td>
+			<td><a href="${pageContext.request.contextPath}/customer/showAppointmentUpdateForm/${tempAppointment.ID}" ><i
+							class="fa fa-refresh" aria-hidden="true"></i>Update</a></td>
 			</tr>
 		</c:forEach>
 	</table>
