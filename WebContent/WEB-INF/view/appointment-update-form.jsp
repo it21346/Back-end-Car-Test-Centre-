@@ -5,7 +5,7 @@
 	<h3>Update Appointment: Status--> ${appointment.status}</h3>
 
 	<form:form
-		action="${pageContext.request.contextPath}/customer/updateAppointment/${appointment.ID}"
+		action="${pageContext.request.contextPath}/customer/updateAppointment/${appointment.customer_appoint.getID()}/${appointment.ID}"
 		modelAttribute="appointment" method="POST" class="ui form">
 		<div class="field">
 			<label>Name</label>
@@ -21,10 +21,9 @@
 		</div>
 		<div class="field">
 			<label>Status</label>
-			<form:input path="status" />
+			<form:radiobutton name="checked" value="Checked" path="status"/>Checked
+			<form:radiobutton  name="unchecked" value="Unchecked" path="status"/>Unchecked
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>
-	<td><c:if test="${not empty errorr}">
-		Error: ${errorr}</c:if></td>
 </div>

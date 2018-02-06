@@ -58,10 +58,9 @@ public class CustomerController {
 		return "appointment-update-form";
 	}
 
-	@PostMapping("/updateAppointment/{ID}")
-	public String updateAppointment(@PathVariable("ID") int appointment_ID) {
-		Appointment appointment = customerService.getAppointment(appointment_ID);
-		System.out.println(appointment.getStatus());
+	@PostMapping("/updateAppointment/{customer_ID}/{ID}")
+	public String updateAppointment(@PathVariable("ID") int appointment_ID,@PathVariable("customer_ID") int customer_ID,@ModelAttribute("appointment") Appointment appointment) {
+		appointment.setCustomer_appoint(customerService.getCustomer(customer_ID));
 		customerService.updateAppointment(appointment);
 		return "redirect:/customer/appointments"; 
 	}

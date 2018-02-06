@@ -119,7 +119,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public void updateAppointment(Appointment appointment) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
-		
+		System.out.println("----->"+appointment.getStatus());
 		currentSession.update(appointment);
 	}
 }
