@@ -41,13 +41,30 @@ public class CustomerController {
 	public String listAppointments(Model model) {
 		// get the appointments from the service
 		List<Appointment> appointments = customerService.getAppointments();
-		// add the appointments to the model		
+		// add the appointments to the model
 		model.addAttribute("appointments", appointments);
 		// add page title
 		model.addAttribute("pageTitle", "List Appointments");
 		return "appointments";
 	}
 
+	@GetMapping("/showAppointmentUpdateForm/{ID}")
+	public String showAppointmentUpdateForm(@PathVariable("ID") int ID, Model model) {
+		Appointment appointment = customerService.getAppointment(ID);
+		model.addAttribute("appointment", appointment);
+		// add page title
+		model.addAttribute("pageTitle", "Update Appointment");
+		
+		return "appointment-update-form";
+	}
+
+	@PostMapping("/updateAppointment/{ID}")
+	public String updateAppointment(@PathVariable("ID") int appointment_ID) {
+		Appointment appointment = customerService.getAppointment(appointment_ID);
+		System.out.println(appointment.getStatus());
+		customerService.updateAppointment(appointment);
+		return "redirect:/customer/appointments"; 
+	}
 	@GetMapping("/{ID}")
 	public String getCustomer(Model model, @PathVariable("ID") int ID) {
 		// get the customer

@@ -103,4 +103,23 @@ public class CustomerDAOImpl implements CustomerDAO {
 		// save the appointment
 		currentSession.save(appointment);
 	}
+
+	@Override
+	public Appointment getAppointment(int ID) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// get and return appointment
+		Appointment appointment = currentSession.get(Appointment.class, ID);
+
+		return appointment;
+	}
+
+	@Override
+	public void updateAppointment(Appointment appointment) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.update(appointment);
+	}
 }

@@ -21,5 +21,9 @@ public interface CustomerService {
 	public List<Appointment> getAppointments();
 
 	public void saveAppointment(Appointment appointment);
+	
+	public Appointment getAppointment(int ID);
+	
+	public void updateAppointment(Appointment appointment);
 
 }

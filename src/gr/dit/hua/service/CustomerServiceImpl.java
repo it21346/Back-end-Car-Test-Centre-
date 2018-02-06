@@ -65,5 +65,17 @@ public class CustomerServiceImpl implements CustomerService {
 	public void saveAppointment(Appointment appointment) {
 		customerDAO.saveAppointment(appointment);	
 	}
+
+	@Override
+	@Transactional
+	public Appointment getAppointment(int ID) {
+		return customerDAO.getAppointment(ID);
+	}
+
+	@Override
+	@Transactional
+	public void updateAppointment(Appointment appointment) {
+		customerDAO.updateAppointment(appointment);
+	}
 	
 }
