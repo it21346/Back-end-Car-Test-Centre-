@@ -41,6 +41,7 @@
 				<option value="Check Pending">Check Pending</option>
 				<option value="Needs to Fix issues">Needs to Fix issues</option>
 				<option value="Check Completed">Check Completed</option>
+				<option value="Fee's Paid">Fee's Paid</option>
 			</select>
 		</div>		
 		<div class="field">

@@ -13,7 +13,7 @@
 			<th>Registration Number</th>
 			<th>Type</th>
 			<th>Date</th>
-			<th>Time Of Arrival</th>
+			<th>Time Of Next Check</th>
 			<th>Fee</th>
 			<th>CC</th>
 			<th>Status</th>
@@ -28,7 +28,7 @@
 				<td>${tempVehicle.registration_number}</td>
 				<td>${tempVehicle.type}</td>
 				<td>${tempVehicle.date}</td>
-				<td>${tempVehicle.TIME_OF_ARRIVAL}</td>
+				<td>${tempVehicle.getDate_OF_NEXT_CHECK()}</td>
 				<c:if test="${not empty fee}">
 					<td>${fee}</td>
 				</c:if>
@@ -44,11 +44,11 @@
 							onclick="return confirm('Are you sure you want to delete?')">
 							<i class="fa fa-times" aria-hidden="true"></i> Delete
 						</a>
-					</sec:authorize> <br></br> <sec:authorize access="hasRole('ROLE_ENGINEER')">
+					</sec:authorize> <br></br> 
 						<a
 							href="${pageContext.request.contextPath}/vehicle/showUpdateForm/${customer_id}/${tempVehicle.ID}"><i
 							class="fa fa-refresh" aria-hidden="true"></i> Update</a>
-					</sec:authorize><br></br>
+					<br></br>
 					<form
 						action="${pageContext.request.contextPath}/vehicle/fee/${customer_id}/${tempVehicle.ID}"
 						method="GET">

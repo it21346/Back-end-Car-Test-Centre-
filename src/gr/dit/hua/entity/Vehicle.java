@@ -29,9 +29,15 @@ public class Vehicle implements Serializable {
 	@Column(name = "ID")
 	private int ID;
 
+	@Column(name="Date_OF_NEXT_CHECK")
+	private String Date_OF_NEXT_CHECK;
+	
+	@Column(name="insurance")
+	private String insurance;
+	
 	@Column(name = "model")
 	private String model;
-
+	
 	@Column(name = "registration_number")
 	private String registration_number;
 
@@ -66,6 +72,27 @@ public class Vehicle implements Serializable {
 
 	public Vehicle() {
 
+	}
+
+	public String getInsurance() {
+		return insurance;
+	}
+
+
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
+	}
+
+
+
+
+
+	public String getDate_OF_NEXT_CHECK() {
+		return Date_OF_NEXT_CHECK;
+	}
+
+	public void setDate_OF_NEXT_CHECK(String date_OF_NEXT_CHECK) {
+		Date_OF_NEXT_CHECK = date_OF_NEXT_CHECK;
 	}
 
 
@@ -168,11 +195,16 @@ public class Vehicle implements Serializable {
 	}
 
 
+
 	@Override
 	public String toString() {
-		return "Vehicle [ID=" + ID + ", model=" + model + ", registration_number=" + registration_number + ", Type="
-				+ Type + ", date=" + date + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + ", cc=" + cc
-				+ ", status=" + status + "]";
+		return "Vehicle [ID=" + ID + ", Date_OF_NEXT_CHECK=" + Date_OF_NEXT_CHECK + ", model=" + model
+				+ ", registration_number=" + registration_number + ", Type=" + Type + ", date=" + date + ", customer="
+				+ customer + ", TIME_OF_ARRIVAL=" + TIME_OF_ARRIVAL + ", fee=" + fee + ", cc=" + cc + ", status="
+				+ status + "]";
 	}
+
+
+
 
 }

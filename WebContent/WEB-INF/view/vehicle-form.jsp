@@ -14,7 +14,7 @@
 		</div>
 		<div class="field">
 			<label>Type of Vehicle</label>
-			<form:radiobuttons path="Type" value="Epivatigo" checked="checked" />
+			<form:radiobuttons path="Type"  checked="checked" />
 		</div>
 		<div class="field">
 			<label>Date</label>
@@ -25,7 +25,7 @@
 			<form:input path="cc" />
 		</div>
 		<div class="field">
-			<label>Insurance</label> <select name="insurance" form="vehicleForm">
+			<label>Insurance</label> <select id="option" name="insurance" form="vehicleForm">
 				<option value="Valid">Valid</option>
 				<option value="Invalid">Invalid</option>
 			</select>

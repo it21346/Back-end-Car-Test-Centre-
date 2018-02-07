@@ -1,6 +1,7 @@
 package gr.dit.hua.controller;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import gr.dit.hua.service.VehicleService;
 @Controller
 @RequestMapping("/vehicle")
 public class VehicleController {
+	
 	// inject the vehicle service
 	@Autowired
 	private VehicleService vehicleService;
@@ -88,16 +91,33 @@ public class VehicleController {
 	}
 
 	@PostMapping("/updateVehicle/{cust_ID}/{veh_ID}")
-	public String updateVehicle(Float fee_price,String statusList,@PathVariable("cust_ID") int cust_ID,@PathVariable("veh_ID") int veh_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+	public String updateVehicle(Float fee_price,String statusList,@PathVariable("cust_ID") int cust_ID,@PathVariable("veh_ID") int veh_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) throws ParseException {
 		vehicle.setStatus(statusList);
 		vehicle.setID(veh_ID);
+		
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
 		if (vehicleService.exists(vehicle) == false) {
 			// save the vehicle using the service
 			Customer cust = customerService.getCustomer(cust_ID);
+			Vehicle vehicle1 = vehicleService.getVehicle(veh_ID);
+			
 			vehicle.setCustomer(cust);
+			vehicle.setDate_OF_NEXT_CHECK(vehicle1.getDate_OF_NEXT_CHECK());
+			if(vehicle.getStatus().equals("Fee's Paid")) {
+				String string = vehicle.getDate();
+				DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
+				Date date = format.parse(string);
+				Calendar c = Calendar.getInstance();
+				c.setTime(date);
+				c.add(Calendar.YEAR, 2);
+				Date newdate = c.getTime();
+				Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String s = formatter.format(newdate);
+				vehicle.setDate_OF_NEXT_CHECK(s);
+				vehicle.setInsurance("Yes");
+			}
 			vehicleService.updateVehicle(vehicle);
 			return "redirect:/vehicle/listVehicles/" + vehicle.getCustomer().getID();
 		} else {
@@ -113,8 +133,12 @@ public class VehicleController {
 	}
 
 	@PostMapping("/saveVehicle/{ID}")
-	public String saveVehicle(@PathVariable("ID") int cust_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
-		vehicle.setStatus("Pending");
+	public String saveVehicle(String insurance,@PathVariable("ID") int cust_ID,@ModelAttribute("vehicle") Vehicle vehicle, Model model) {
+		vehicle.setStatus("Check Pending");
+		vehicle.setInsurance("Yes");
+		if(insurance.equals("Invalid")){
+			vehicle.setInsurance("No");
+		}
 		if (vehicle.getDate() == "") {
 			vehicle.setDate(null);
 		}
@@ -123,12 +147,16 @@ public class VehicleController {
 			Customer cust = customerService.getCustomer(cust_ID);
 			vehicle.setCustomer(cust);
 			// new customer,add using the service
+			System.out.println("------------>"+vehicle.toString());
 			vehicleService.saveVehicle(vehicle);			
 			return "redirect:/vehicle/listVehicles/" + cust_ID;
 		} else {
 			System.out.println("Vehicle already exists!");
-			model.addAttribute("error", "The Vehicle already exists.Please try again!");
-			model.addAttribute("customer_id", vehicle.getCustomer().getID());			
+			Customer cust = customerService.getCustomer(cust_ID);
+			vehicle.setCustomer(cust);
+			model.addAttribute("errorr", "The Vehicle already exists.Please try again!");
+			model.addAttribute("vehicle", vehicle);			
+			System.out.println("id -------->"+vehicle.getCustomer().getID());
 			return "vehicle-form";
 		}
 	}
@@ -149,6 +177,9 @@ public class VehicleController {
 		LocalDate to = LocalDate.parse(outputText);
 		long days = ChronoUnit.DAYS.between(from, to);
 		System.out.println("1:"+calculatedFee);
+		if(vehicle.getInsurance().equals("No")) {
+			calculatedFee = calculatedFee +200;
+		}
 		if (vehicle.getType() == type_of_vehicle.Fortigo ) {
 			System.out.println("2:"+calculatedFee);
 			if(vehicle.getCc() <= 3 && vehicle.getCc() > 0) {					
