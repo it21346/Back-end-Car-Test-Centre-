@@ -98,7 +98,9 @@ public class CustomerApiController {
 		customer.setSurname(password);
 		int checkID = customerService.existsLogin(customer);
 		if ( checkID != 0) {
-			return customerService.getCustomer(checkID);
+			System.out.println("Inside the api call");
+			Customer customerNull = customerService.getCustomer(checkID);
+			return customerNull;
 		}else {
 			Customer customerNull = new Customer();
 			return customerNull;
