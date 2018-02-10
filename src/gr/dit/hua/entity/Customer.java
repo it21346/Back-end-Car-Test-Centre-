@@ -98,9 +98,10 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [ID=" + ID + ", name=" + name + ", surname=" + surname + ", email=" + email + "]";
+		return "Customer [ID=" + ID + ", name=" + name + ", surname=" + surname + ", email=" + email + ", vehicles="
+				+ vehicles + ", appointments=" + appointments + "]";
 	}
-	
+
 	public void addVehicle(Vehicle avehicle) {
 		if(vehicles == null) {
 			vehicles = new ArrayList<>();

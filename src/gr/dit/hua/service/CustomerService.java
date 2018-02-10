@@ -18,6 +18,8 @@ public interface CustomerService {
 
 	public boolean exists(Customer customer);
 
+	public int existsLogin(Customer customer);
+	
 	public List<Appointment> getAppointments();
 
 	public void saveAppointment(Appointment appointment);

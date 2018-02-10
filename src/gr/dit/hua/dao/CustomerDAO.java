@@ -17,6 +17,8 @@ public interface CustomerDAO {
 	public void updateCustomer(Customer customer);
 
 	public boolean exists(Customer customer);
+	
+	public int existsLogin(Customer customer);
 
 	public List<Appointment> getAppointments();
 

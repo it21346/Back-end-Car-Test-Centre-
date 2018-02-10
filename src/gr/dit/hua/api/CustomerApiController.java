@@ -90,4 +90,18 @@ public class CustomerApiController {
 		this.appointmentList.setAppointmentList(appointments);
 		return this.appointmentList;
 	}
+	
+	@RequestMapping(value = "/loginCredentials", method = RequestMethod.POST , produces = {"application/json", "application/xml"})
+	public Customer checkCredentials(@RequestParam("username") String username,@RequestParam("password") String password) {
+		Customer customer = new Customer();
+		customer.setName(username);
+		customer.setSurname(password);
+		int checkID = customerService.existsLogin(customer);
+		if ( checkID != 0) {
+			return customerService.getCustomer(checkID);
+		}else {
+			Customer customerNull = new Customer();
+			return customerNull;
+		}
+	}
 }

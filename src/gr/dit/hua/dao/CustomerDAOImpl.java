@@ -119,7 +119,22 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public void updateAppointment(Appointment appointment) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
-		System.out.println("----->"+appointment.getStatus());
+		System.out.println("----->" + appointment.getStatus());
 		currentSession.update(appointment);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public int existsLogin(Customer customer) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<?> query = currentSession
+				.createQuery("select c.ID from Customer c where  c.name= :key and c.surname= :key2");
+		query.setString("key", customer.getName());
+		query.setString("key2", customer.getSurname());
+		if(query.uniqueResult() != null) {
+			return  (int) query.uniqueResult();
+		}else {
+			return 0;
+		}
 	}
 }

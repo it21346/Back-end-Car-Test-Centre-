@@ -77,5 +77,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public void updateAppointment(Appointment appointment) {
 		customerDAO.updateAppointment(appointment);
 	}
+
+	@Override
+	@Transactional
+	public int existsLogin(Customer customer) {
+		return customerDAO.existsLogin(customer);
+	}
 	
 }
