@@ -83,5 +83,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public int existsLogin(Customer customer) {
 		return customerDAO.existsLogin(customer);
 	}
+
+	@Override
+	@Transactional
+	public List<Appointment> getCustomerAppointments(int ID) {
+		return customerDAO.getCustomerAppointments(ID);
+	}
 	
 }

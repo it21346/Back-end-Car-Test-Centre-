@@ -30,7 +30,7 @@ public class CustomerApiController {
 
 	@Autowired
 	private AppointmentList appointmentList;
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
 	public Customer getCustomer(@PathVariable("id") int id) {
 
@@ -74,7 +74,8 @@ public class CustomerApiController {
 
 	@RequestMapping(value = "/appointment", method = RequestMethod.POST, produces = { "application/json",
 			"application/xml" })
-	public Appointment createAppointment(@RequestParam("customer_id") int customer_ID, @RequestParam("date") String date) {
+	public Appointment createAppointment(@RequestParam("customer_id") int customer_ID,
+			@RequestParam("date") String date) {
 		Appointment appointment = new Appointment(date);
 		appointment.setCustomer_appoint(customerService.getCustomer(customer_ID));
 		appointment.setStatus("Unckecked");
@@ -82,7 +83,17 @@ public class CustomerApiController {
 		return appointment;
 	}
 
-	@RequestMapping(value = "/allAppointments", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
+	@RequestMapping(value = "/CustomerAppointments/{ID}", method = RequestMethod.GET, produces = { "application/json",
+			"application/xml" })
+	public AppointmentList getCustomerAppointments(@PathVariable("ID") int ID) {
+		List<Appointment> appointments = customerService.getCustomerAppointments(ID);
+		System.out.println("appointments :" + appointments);
+		this.appointmentList.setAppointmentList(appointments);
+		return this.appointmentList;
+	}
+
+	@RequestMapping(value = "/allAppointments", method = RequestMethod.GET, produces = { "application/json",
+			"application/xml" })
 	public AppointmentList getAppointments() {
 
 		List<Appointment> appointments = customerService.getAppointments();
@@ -90,18 +101,20 @@ public class CustomerApiController {
 		this.appointmentList.setAppointmentList(appointments);
 		return this.appointmentList;
 	}
-	
-	@RequestMapping(value = "/loginCredentials", method = RequestMethod.POST , produces = {"application/json", "application/xml"})
-	public Customer checkCredentials(@RequestParam("username") String username,@RequestParam("password") String password) {
+
+	@RequestMapping(value = "/loginCredentials", method = RequestMethod.POST, produces = { "application/json",
+			"application/xml" })
+	public Customer checkCredentials(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
 		Customer customer = new Customer();
 		customer.setName(username);
 		customer.setSurname(password);
 		int checkID = customerService.existsLogin(customer);
-		if ( checkID != 0) {
+		if (checkID != 0) {
 			System.out.println("Inside the api call");
 			Customer customerNull = customerService.getCustomer(checkID);
 			return customerNull;
-		}else {
+		} else {
 			Customer customerNull = new Customer();
 			return customerNull;
 		}

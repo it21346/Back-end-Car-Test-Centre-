@@ -27,4 +27,6 @@ public interface CustomerDAO {
 	public Appointment getAppointment(int ID);
 	
 	public void updateAppointment(Appointment appointment);
+
+	public List<Appointment> getCustomerAppointments(int iD);
 }

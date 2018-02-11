@@ -28,4 +28,6 @@ public interface CustomerService {
 	
 	public void updateAppointment(Appointment appointment);
 
+	public List<Appointment> getCustomerAppointments(int iD);
+
 }

@@ -98,8 +98,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [ID=" + ID + ", name=" + name + ", surname=" + surname + ", email=" + email + ", vehicles="
-				+ vehicles + ", appointments=" + appointments + "]";
+		return "Customer [ID=" + ID + ", name=" + name + ", surname=" + surname + ", email=" + email + "]";
 	}
 
 	public void addVehicle(Vehicle avehicle) {

@@ -131,10 +131,27 @@ public class CustomerDAOImpl implements CustomerDAO {
 				.createQuery("select c.ID from Customer c where  c.name= :key and c.surname= :key2");
 		query.setString("key", customer.getName());
 		query.setString("key2", customer.getSurname());
-		if(query.uniqueResult() != null) {
-			return  (int) query.uniqueResult();
-		}else {
+		if (query.uniqueResult() != null) {
+			return (int) query.uniqueResult();
+		} else {
 			return 0;
 		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<Appointment> getCustomerAppointments(int ID) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// create a query
+		Query<Appointment> query = currentSession.createQuery("from Appointment where customer_id = :key",
+				Appointment.class);
+		query.setLong("key", ID);
+
+		// execute the query and get the results list
+		List<Appointment> appointments = query.getResultList();
+		
+		return appointments;
 	}
 }
